@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mdc-frontend",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Any path that is not a real file falls back to index.html, so the
+    // app can mirror the original site's URL paths one-to-one.
+    "not_found_handling": "single-page-application",
+    // Only these two prefixes ever reach the Worker; everything else is
+    // served straight from static assets.
+    "run_worker_first": ["/api/*", "/img/*"]
+  },
+  "vars": {
+    "ORIGIN": "http://www.mdc.idv.tw"
+  },
+  "observability": { "enabled": true }
+}

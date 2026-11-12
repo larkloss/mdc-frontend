@@ -1,0 +1,14 @@
+{
+  "name": "mdc-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A personal reading UI for mdc.idv.tw, content fetched live from the original site.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <title>MDC 閱讀器</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <script>
+    // apply saved appearance before first paint
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('mdc.settings') || '{}');
+        var r = document.documentElement;
+        if (s.theme === 'light' || s.theme === 'dark') r.dataset.theme = s.theme;
+        if (s.size != null) r.dataset.size = s.size;
+        if (s.font) r.dataset.font = s.font;
+      } catch (e) {}
+    })();
+  </script>
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <aside id="side" aria-label="導覽">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width=".8" opacity=".5"/><path d="M16 6l3.2 10L16 26l-3.2-10z" fill="currentColor"/></svg>
+        <span><b>MDC 閱讀器</b><small>軍武狂人夢 · 個人閱讀介面</small></span>
+      </a>
+      <nav id="sections" aria-label="分區"></nav>
+      <section id="context" hidden>
+        <div class="context-head">
+          <a id="context-up" hidden></a>
+          <h2 id="context-title"></h2>
+        </div>
+        <input id="context-filter" type="search" placeholder="篩選目錄…" autocomplete="off" aria-label="篩選目錄">
+        <div id="context-list"></div>
+      </section>
+    </aside>
+    <div id="scrim"></div>
+
+    <div id="main">
+      <header id="bar">
+        <button id="btn-menu" class="icon" aria-label="開啟導覽">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        </button>
+        <nav id="crumbs" aria-label="位置"></nav>
+        <div class="tools">
+          <button id="btn-mark" class="icon" aria-label="加入書籤" aria-pressed="false" hidden>
+            <svg viewBox="0 0 24 24" width="19" height="19"><path d="M6.5 4h11v16.5l-5.5-4-5.5 4z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
+          </button>
+          <a id="btn-source" class="icon" aria-label="開啟原站頁面" title="開啟原站頁面" target="_blank" rel="noopener noreferrer" hidden>
+            <svg viewBox="0 0 24 24" width="19" height="19"><path d="M14 5h5v5M19 5l-8 8M11 6H6v12h12v-5" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button id="btn-settings" class="icon text" aria-label="閱讀設定" aria-expanded="false">Aa</button>
+        </div>
+        <div id="progress"><i></i></div>
+        <div id="settings" hidden>
+          <div class="row"><span>字級</span>
+            <div class="seg"><button data-size="-1" aria-label="縮小">A−</button><button data-size="+1" aria-label="放大">A+</button></div>
+          </div>
+          <div class="row"><span>字體</span>
+            <div class="seg" data-setting="font"><button data-value="sans">黑體</button><button data-value="serif">明體</button></div>
+          </div>
+          <div class="row"><span>主題</span>
+            <div class="seg" data-setting="theme"><button data-value="auto">自動</button><button data-value="light">淺色</button><button data-value="dark">深色</button></div>
+          </div>
+        </div>
+      </header>
+      <main id="view" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <dialog id="lightbox" aria-label="圖片檢視">
+    <button class="lb-close icon" aria-label="關閉">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <button class="lb-nav lb-prev icon" aria-label="上一張"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="lb-nav lb-next icon" aria-label="下一張"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+  </dialog>
+  <noscript>這個閱讀介面需要 JavaScript。</noscript>
+</body>
+</html>
